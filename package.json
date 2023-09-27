@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon Chat-App/server/server.js",
-    "test": "mocha Chat-App/**/*.test.js",
+    "start": "nodemon server/server.js",
+    "test": "mocha server/**/*.test.js",
     "test-watch": "nodemon --exec \"npm test\""
   },
   "author": "Amr Elkfrawy",
@@ -13,6 +13,7 @@
   "dependencies": {
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "moment": "^2.29.4",
     "nodemon": "^3.0.1",
     "socket.io": "^4.7.2"
   },
