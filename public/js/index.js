@@ -9,22 +9,27 @@ socket.on('disconnect', function () {
 });
 
 socket.on('newMessage', function (message) {
-  console.log('newMessage', message);
+  const formattedTime = moment(message.createdAt).format('LT');
   const li = document.createElement('li');
-  li.innerText = `${message.from}: ${message.text} `;
+  li.innerText = `${message.from} (${formattedTime}): ${message.text} `;
 
-  document.querySelector('body').appendChild(li);
+  const messagesList = document.querySelector('#messages');
+  messagesList.appendChild(li);
 });
+
 socket.on('newLocationMessage', function (message) {
-  console.log('newLocationMessage', message);
+  const formattedTime = moment(message.createdAt).format('LT');
   const li = document.createElement('li');
+  li.innerText = `${message.from} (${formattedTime}): `;
+
   const a = document.createElement('a');
   a.setAttribute('target', '_blank');
   a.setAttribute('href', message.url);
   a.innerText = 'My current location';
   li.appendChild(a);
 
-  document.querySelector('body').appendChild(li);
+  const messagesList = document.querySelector('#messages');
+  messagesList.appendChild(li);
 });
 
 document.querySelector('#submit-btn').addEventListener('click', function (e) {
