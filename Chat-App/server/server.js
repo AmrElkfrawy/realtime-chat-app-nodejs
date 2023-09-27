@@ -5,7 +5,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const socketIO = require('socket.io');
 
-const { generateMessage } = require('./utils/message');
+const { generateMessage, generateLocationMessage } = require('./utils/message');
 
 dotenv.config({ path: './.env' });
 
@@ -36,6 +36,13 @@ io.on('connection', (socket) => {
     // Emit the message and provide data to the acknowledgment callback
     io.emit('newMessage', responseMessage);
     callback('This is the server acknowledgment'); // Pass data to the callback
+  });
+
+  socket.on('createLocationMessage', (coords) => {
+    io.emit(
+      'newLocationMessage',
+      generateLocationMessage('Admin', coords.lat, coords.lng)
+    );
   });
 
   socket.on('disconnect', (socket) => {
