@@ -11,3 +11,15 @@ socket.on('disconnect', function () {
 socket.on('newMessage', function (message) {
   console.log('newMessage', message);
 });
+
+socket.emit(
+  'createMessage',
+  {
+    from: 'John',
+    text: 'Hey',
+  },
+  function (serverData) {
+    // Use the same name 'callback' for the parameter
+    console.log('Server got it:', serverData);
+  }
+);

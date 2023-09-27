@@ -5,6 +5,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 const socketIO = require('socket.io');
 
+const { generateMessage } = require('./utils/message');
+
 dotenv.config({ path: './.env' });
 
 const app = express();
@@ -17,24 +19,23 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
   console.log('A new user connected');
 
-  socket.emit('newMessage', {
-    from: 'Admin',
-    text: 'Welcome to the chat app!',
-    createdAt: new Date(),
-  });
-  socket.broadcast.emit('newMessage', {
-    from: 'Admin',
-    text: 'New user joined!',
-    createdAt: new Date(),
-  });
+  socket.emit(
+    'newMessage',
+    generateMessage('Admin', 'Welcome to the chat app!')
+  );
 
-  socket.on('createMessage', (message) => {
-    console.log('createMessage', message);
-    socket.broadcast.emit('newMessage', {
-      from: message.from,
-      text: message.text,
-      createdAt: new Date(),
-    });
+  socket.broadcast.emit(
+    'newMessage',
+    generateMessage('Admin', 'New user joined!')
+  );
+
+  socket.on('createMessage', (message, callback) => {
+    // Process the message
+    const responseMessage = generateMessage(message.from, message.text);
+
+    // Emit the message and provide data to the acknowledgment callback
+    io.emit('newMessage', responseMessage);
+    callback('This is the server acknowledgment'); // Pass data to the callback
   });
 
   socket.on('disconnect', (socket) => {
