@@ -12,6 +12,9 @@ li {
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
+}
+
+.chat {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -34,6 +37,7 @@ body {
   flex: 1;
   padding: 10px;
   font-size: 16px;
+  border: none;
   border-radius: 5px;
 }
 
@@ -73,22 +77,15 @@ body {
 
 .message__title h4 {
   font-size: 18px;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 
 .message__title span {
   font-size: 14px;
   color: #888;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 15px;
 }
 
 .message__body p {
   font-size: 16px;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 
 /* Style links in messages */
@@ -99,18 +96,4 @@ body {
 
 .message__body a:hover {
   text-decoration: underline;
-}
-
-.chat__main {
-  position: relative;
-}
-
-.chat__footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #fff;
-  padding: 20px;
-  border-top: 1px solid #ccc;
 }
