@@ -1,5 +1,10 @@
 const socket = io();
 
+function scrollToBottem() {
+  const message = document.querySelector('#messages').lastElementChild;
+  message.scrollIntoView();
+}
+
 socket.on('connect', function () {
   console.log('Connected to server.');
 });
@@ -22,13 +27,7 @@ socket.on('newMessage', function (message) {
 
   const messagesList = document.querySelector('#messages');
   messagesList.appendChild(div);
-
-  // const formattedTime = moment(message.createdAt).format('LT');
-  // const li = document.createElement('li');
-  // li.innerText = `${message.from} (${formattedTime}): ${message.text} `;
-
-  // const messagesList = document.querySelector('#messages');
-  // messagesList.appendChild(li);
+  scrollToBottem();
 });
 
 socket.on('newLocationMessage', function (message) {
@@ -49,19 +48,7 @@ socket.on('newLocationMessage', function (message) {
 
   const messagesList = document.querySelector('#messages');
   messagesList.appendChild(div);
-
-  // const formattedTime = moment(message.createdAt).format('LT');
-  // const li = document.createElement('li');
-  // li.innerText = `${message.from} (${formattedTime}): `;
-
-  // const a = document.createElement('a');
-  // a.setAttribute('target', '_blank');
-  // a.setAttribute('href', message.url);
-  // a.innerText = 'My current location';
-  // li.appendChild(a);
-
-  // const messagesList = document.querySelector('#messages');
-  // messagesList.appendChild(li);
+  scrollToBottem();
 });
 
 document.querySelector('#submit-btn').addEventListener('click', function (e) {

@@ -95,6 +95,12 @@ button:disabled {
   display: block;
   margin-bottom: 7px;
 }
+.form-field h1 {
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
 .form-field input,
 .form-field select {
   border: 1px solid #e1e1e1;
