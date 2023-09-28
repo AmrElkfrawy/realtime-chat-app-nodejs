@@ -1,5 +1,3 @@
-const moment = require('moment');
-
 const generateMessage = (from, text) => {
   return {
     from,

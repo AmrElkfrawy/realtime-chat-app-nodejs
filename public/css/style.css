@@ -37,7 +37,8 @@ body {
   flex: 1;
   padding: 10px;
   font-size: 16px;
-  border: none;
+  border: rgb(0, 0, 0);
+  border-style: inset;
   border-radius: 5px;
 }
 

@@ -37,7 +37,12 @@ socket.on('newMessage', function (message) {
 });
 
 socket.on('newLocationMessage', function (message) {
-  const formattedTime = moment(message.createdAt).format('LT');
+  const currentDate = new Date();
+  const currentHour = currentDate.getHours();
+  const currentMinute = currentDate.getMinutes();
+  const formattedHour = currentHour.toString().padStart(2, '0');
+  const formattedMinute = currentMinute.toString().padStart(2, '0');
+  const formattedTime = `${formattedHour}:${formattedMinute}`;
 
   const template = document.querySelector(
     '#location-message-template'
