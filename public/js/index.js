@@ -14,7 +14,13 @@ socket.on('disconnect', function () {
 });
 
 socket.on('newMessage', function (message) {
-  const formattedTime = moment(message.createdAt).format('LT');
+  const currentDate = new Date();
+  const currentHour = currentDate.getHours();
+  const currentMinute = currentDate.getMinutes();
+  const formattedHour = currentHour.toString().padStart(2, '0');
+  const formattedMinute = currentMinute.toString().padStart(2, '0');
+  const formattedTime = `${formattedHour}:${formattedMinute}`;
+
   const template = document.querySelector('#message-template').innerHTML;
   const html = Mustache.render(template, {
     from: message.from,
@@ -59,7 +65,9 @@ document.querySelector('#submit-btn').addEventListener('click', function (e) {
       from: 'User',
       text: document.querySelector('input[name="message"]').value,
     },
-    function () {}
+    function (acc) {
+      console.log(acc);
+    }
   );
 });
 
@@ -77,8 +85,8 @@ document
           lng: position.coords.longitude,
         });
       },
-      function () {
-        alert('Unable to fetch location.');
+      function (acc) {
+        console.log(acc);
       }
     );
   });
